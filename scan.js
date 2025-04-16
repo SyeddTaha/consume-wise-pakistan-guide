@@ -1,19 +1,196 @@
-
 // DOM Elements
 const scanButton = document.getElementById('scan-button');
+const uploadButton = document.querySelector('.btn-outline');
 const productResult = document.getElementById('product-result');
 const productPlaceholder = document.getElementById('product-placeholder');
 const scannerPlaceholder = document.getElementById('scanner-placeholder');
 const scanningAnimation = document.getElementById('scanning-animation');
+const scanningArea = document.getElementById('scanning-area');
+
+// Create a hidden file input element for image upload
+const fileInput = document.createElement('input');
+fileInput.type = 'file';
+fileInput.accept = 'image/*';
+fileInput.style.display = 'none';
+document.body.appendChild(fileInput);
 
 // Handle scan button click
 if (scanButton) {
   scanButton.addEventListener('click', () => {
-    startScan();
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      // Use real camera if available
+      startRealCamera();
+    } else {
+      // Fallback to simulation if camera not available
+      startScan();
+    }
   });
 }
 
-// Start the scanning process
+// Handle upload button click
+if (uploadButton) {
+  uploadButton.addEventListener('click', () => {
+    fileInput.click();
+  });
+}
+
+// Handle file selection
+fileInput.addEventListener('change', (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    uploadImage(file);
+  }
+});
+
+// Process uploaded image
+function uploadImage(file) {
+  // Show scanning animation
+  scannerPlaceholder.classList.add('hidden');
+  scanningAnimation.classList.remove('hidden');
+  
+  // Create a preview of the uploaded image
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    // Create an image element inside scanning area
+    const imagePreview = document.createElement('img');
+    imagePreview.src = e.target.result;
+    imagePreview.className = 'uploaded-image-preview';
+    
+    // Clear scanner area and add the image
+    scanningAnimation.classList.add('hidden');
+    scanningArea.innerHTML = '';
+    scanningArea.appendChild(imagePreview);
+    
+    // Simulate processing the image after 2 seconds
+    setTimeout(() => {
+      // Get random product
+      const randomIndex = Math.floor(Math.random() * sampleProducts.length);
+      const randomProduct = sampleProducts[randomIndex];
+      
+      // Show product result and hide placeholder
+      productResult.classList.remove('hidden');
+      productPlaceholder.classList.add('hidden');
+      
+      // Render product details
+      renderProductCard(randomProduct, productResult);
+      
+      // Reset the scanner area after 1 more second
+      setTimeout(() => {
+        scanningArea.innerHTML = '';
+        scanningArea.appendChild(scannerPlaceholder);
+        scannerPlaceholder.classList.remove('hidden');
+        
+        // Reset file input
+        fileInput.value = '';
+      }, 1000);
+      
+      // Show notification
+      showNotification(`Product identified: ${randomProduct.name}`);
+    }, 2000);
+  };
+  
+  reader.readAsDataURL(file);
+}
+
+// Start the real camera
+function startRealCamera() {
+  // Create video element for camera feed
+  const video = document.createElement('video');
+  video.setAttribute('autoplay', '');
+  video.setAttribute('playsinline', '');
+  video.className = 'camera-feed';
+  
+  // Remove any existing content
+  scanningArea.innerHTML = '';
+  scanningArea.appendChild(video);
+  
+  // Add scanning animation on top of video
+  const scanLineDiv = document.createElement('div');
+  scanLineDiv.className = 'scanner-line';
+  scanningArea.appendChild(scanLineDiv);
+  
+  // Start camera
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+    .then(function(stream) {
+      video.srcObject = stream;
+      
+      // Create a take picture button
+      const captureBtn = document.createElement('button');
+      captureBtn.className = 'capture-button';
+      captureBtn.innerHTML = '<i class="fas fa-camera"></i>';
+      scanningArea.appendChild(captureBtn);
+      
+      captureBtn.addEventListener('click', function() {
+        // Create a canvas to capture the image
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        // Stop all video tracks
+        stream.getTracks().forEach(track => track.stop());
+        
+        // Remove video and capture button
+        scanningArea.removeChild(video);
+        scanningArea.removeChild(captureBtn);
+        scanningArea.removeChild(scanLineDiv);
+        
+        // Show scanning animation
+        scanningAnimation.classList.remove('hidden');
+        scanningArea.appendChild(scanningAnimation);
+        
+        // Simulate processing the captured image
+        setTimeout(() => {
+          // Hide scanning animation
+          scanningAnimation.classList.add('hidden');
+          
+          // Get random product
+          const randomIndex = Math.floor(Math.random() * sampleProducts.length);
+          const randomProduct = sampleProducts[randomIndex];
+          
+          // Show product result and hide placeholder
+          productResult.classList.remove('hidden');
+          productPlaceholder.classList.add('hidden');
+          
+          // Render product details
+          renderProductCard(randomProduct, productResult);
+          
+          // Reset the scanner area
+          scanningArea.innerHTML = '';
+          scanningArea.appendChild(scannerPlaceholder);
+          scannerPlaceholder.classList.remove('hidden');
+          
+          // Show notification
+          showNotification(`Product identified: ${randomProduct.name}`);
+        }, 2000);
+      });
+      
+      // Create a close camera button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'close-camera-button';
+      closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+      scanningArea.appendChild(closeBtn);
+      
+      closeBtn.addEventListener('click', function() {
+        // Stop all video tracks
+        stream.getTracks().forEach(track => track.stop());
+        
+        // Remove video and buttons
+        scanningArea.innerHTML = '';
+        scanningArea.appendChild(scannerPlaceholder);
+        scannerPlaceholder.classList.remove('hidden');
+      });
+    })
+    .catch(function(error) {
+      console.error("Error accessing camera: ", error);
+      // Fallback to simulation if camera access fails
+      showNotification("Could not access camera. Please allow camera access.", "error");
+      startScan();
+    });
+}
+
+// Fallback: Simulate the scanning process
 function startScan() {
   // Show scanning animation
   scannerPlaceholder.classList.add('hidden');
