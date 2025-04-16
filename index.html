@@ -1,27 +1,139 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ConsumeWise - Smart Label Reader for Pakistan</title>
-    <meta name="description" content="ConsumeWise helps Pakistani consumers make informed food choices with AI-powered label reading and personalized health insights." />
-    <meta name="author" content="ConsumeWise" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConsumeWise - Make Healthier Food Choices</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <div class="logo-icon">CW</div>
+        <span class="logo-text">ConsumeWise</span>
+      </div>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="scan.html"><i class="fas fa-camera"></i> Scan</a></li>
+          <li><a href="products.html"><i class="fas fa-book-open"></i> Products</a></li>
+          <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
 
-    <meta property="og:title" content="ConsumeWise - Smart Label Reader for Pakistan" />
-    <meta property="og:description" content="Make healthier food choices with AI-powered label reading and personalized insights." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Make Healthier Food Choices in Pakistan</h1>
+          <p>ConsumeWise helps you understand food labels, identify harmful ingredients, and find healthier alternatives tailored to your needs.</p>
+          <div class="hero-buttons">
+            <a href="scan.html" class="btn btn-primary"><i class="fas fa-camera"></i> Scan a Product</a>
+            <a href="profile.html" class="btn btn-outline"><i class="fas fa-user"></i> Create Health Profile</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@consumewise" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+    <!-- Features Section -->
+    <section class="features">
+      <div class="container">
+        <h2>How ConsumeWise Helps You</h2>
+        
+        <div class="feature-cards">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-camera"></i>
+            </div>
+            <h3>Scan Products</h3>
+            <p>Point your camera at any food label to instantly analyze ingredients and nutritional content.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Personalized Analysis</h3>
+            <p>Get health insights based on your dietary preferences, allergies, and health goals.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-code-branch"></i>
+            </div>
+            <h3>Find Alternatives</h3>
+            <p>Discover healthier alternatives to products that don't meet your health criteria.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <!-- Scanner Demo Section -->
+    <section class="scanner-demo">
+      <div class="container">
+        <h2>Try It Yourself</h2>
+        <p>Scan a product label to see detailed information</p>
+        
+        <div class="scanner-container">
+          <div class="scanner">
+            <div class="scanner-placeholder">
+              <i class="fas fa-camera"></i>
+              <p>Click to scan a product</p>
+            </div>
+            <button id="scan-button" class="btn btn-primary">Scan Product</button>
+            <button class="btn btn-outline">Upload Image</button>
+          </div>
+          
+          <div id="product-result" class="product-card hidden">
+            <!-- Product details will be inserted here by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Products Section -->
+    <section class="popular-products">
+      <div class="container">
+        <div class="section-header">
+          <h2>Popular Products</h2>
+          <a href="products.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="product-grid" id="popular-products-grid">
+          <!-- Product cards will be inserted here by JavaScript -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-logo">
+        <div class="logo-icon">CW</div>
+        <span class="logo-text">ConsumeWise</span>
+        <p>Make informed food choices in Pakistan</p>
+      </div>
+      
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+      <p class="copyright">© 2025 ConsumeWise. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
 </html>

@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan Products - ConsumeWise</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <div class="logo-icon">CW</div>
+        <span class="logo-text">ConsumeWise</span>
+      </div>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="scan.html" class="active"><i class="fas fa-camera"></i> Scan</a></li>
+          <li><a href="products.html"><i class="fas fa-book-open"></i> Products</a></li>
+          <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container page-container">
+      <h1>Scan a Product</h1>
+      <p class="page-description">Point your camera at a product barcode or label to get instant health insights</p>
+
+      <div class="scan-container">
+        <div class="scan-column">
+          <div class="scanner-box">
+            <div id="scanning-area" class="scanning-area">
+              <div class="scanner-placeholder" id="scanner-placeholder">
+                <i class="fas fa-camera"></i>
+                <p>Tap scan to analyze a product</p>
+              </div>
+              <div class="scanning-animation hidden" id="scanning-animation">
+                <div class="scanner-line"></div>
+                <p>Scanning product...</p>
+              </div>
+            </div>
+            
+            <div class="scanner-controls">
+              <button id="scan-button" class="btn btn-primary">
+                <i class="fas fa-camera"></i> Scan Product
+              </button>
+              <button class="btn btn-outline">
+                <i class="fas fa-upload"></i> Upload Image
+              </button>
+            </div>
+            
+            <p class="scanner-tip">
+              Point your camera at a food product label to analyze its contents
+            </p>
+          </div>
+
+          <div class="scanning-tips">
+            <h3>Scanning Tips:</h3>
+            <ul>
+              <li>Ensure good lighting for best results</li>
+              <li>Hold your device steady</li>
+              <li>Position the barcode or label in the center</li>
+              <li>Try different angles if scanning fails</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="product-column">
+          <div id="product-result" class="product-card-large hidden">
+            <!-- Product details will be inserted here by JavaScript -->
+          </div>
+          <div id="product-placeholder" class="product-placeholder">
+            <i class="fas fa-camera"></i>
+            <h3>No Product Scanned</h3>
+            <p>Scan a product to see detailed information here</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-logo">
+        <div class="logo-icon">CW</div>
+        <span class="logo-text">ConsumeWise</span>
+        <p>Make informed food choices in Pakistan</p>
+      </div>
+      
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+      <p class="copyright">© 2025 ConsumeWise. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="scan.js"></script>
+</body>
+</html>
