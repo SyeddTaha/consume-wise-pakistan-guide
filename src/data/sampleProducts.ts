@@ -5,6 +5,7 @@ export interface Product {
   brand: string;
   image: string;
   description: string;
+  category: string; // Added this line to fix the TypeScript error
   ingredients: string[];
   nutrition: {
     calories: number;
@@ -24,6 +25,7 @@ export const sampleProducts: Product[] = [
     id: "p1",
     name: "Everyday Milk",
     brand: "Nestle",
+    category: "Dairy", // Added category
     image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80",
     description: "Ultra-high temperature (UHT) treated milk with added vitamins and minerals.",
     ingredients: ["Milk", "Vitamins (A, D)", "Minerals (Calcium)"],
@@ -42,6 +44,7 @@ export const sampleProducts: Product[] = [
     id: "p2",
     name: "Energy Biscuits",
     brand: "LU",
+    category: "Snacks", // Added category
     image: "https://images.unsplash.com/photo-1597733336794-12d05021d510?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80",
     description: "Wheat biscuits with glucose and vitamins for quick energy.",
     ingredients: [
@@ -70,6 +73,7 @@ export const sampleProducts: Product[] = [
     id: "p3",
     name: "Fruit Juice",
     brand: "Shezan",
+    category: "Beverages", // Added category
     image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80",
     description: "Mixed fruit juice with no added preservatives.",
     ingredients: [
@@ -95,6 +99,7 @@ export const sampleProducts: Product[] = [
     id: "p4",
     name: "Whole Wheat Atta",
     brand: "Sooper",
+    category: "Grains", // Added category
     image: "https://images.unsplash.com/photo-1586444248879-400728nfdd3b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80",
     description: "Stone-ground whole wheat flour for chapati and roti.",
     ingredients: ["100% Whole Wheat"],
@@ -113,6 +118,7 @@ export const sampleProducts: Product[] = [
     id: "p5",
     name: "Honey Cornflakes",
     brand: "Kellogg's",
+    category: "Breakfast", // Added category
     image: "https://images.unsplash.com/photo-1521483451396-8a73a8af0vulma9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80",
     description: "Crispy corn flakes coated with honey.",
     ingredients: [
